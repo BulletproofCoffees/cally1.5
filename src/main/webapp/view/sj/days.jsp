@@ -58,6 +58,7 @@ $.ajax({
 		 var a = obj[0];
 		 
 		 $(a).each(function(day,e){
+			 console.log(e);
 		  var test = {
 				    title: e.CAL+'cal',
 					start: e.DAY,
@@ -66,27 +67,17 @@ $.ajax({
 		  daycal.push(test); 
 		
 		 });		 
-		 $(document).ready(function() {			  
-			  $('#calendar').fullCalendar({			   
-			    events: daycal
-			  });
-			  // 페이지 이동
-			  $('td').on("click", function() {					
-					 location.replace('${pageContext.request.contextPath}/sj/counter/='+$(this).find('.fc-day').attr("data-date")); 
-				});
-			
+		 $(document).ready(function() {	
+			 
+			 $('#calendar').fullCalendar({			   
+				    events: daycal,
+				    selectable: true,				    
+				    dayClick: function(date) {
+				      location.replace('${pageContext.request.contextPath}/sj/counter/='+date.format());
+				    }
+				  });
 			});		
 	}
 });
-
-
-
-
-
-
-
-
-
-	
 
 </script>
